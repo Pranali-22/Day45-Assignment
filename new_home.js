@@ -1,13 +1,24 @@
+//UC6
+let employeePayrollList;
+
 window.addEventListener('DOMContentLoaded',(event) =>{
+    employeePayrollList = getEmployeePayrollDataFromStorage();
+    document.querySelector(".emp-count").textContent = employeePayrollList.length;
     createInnerHtml();
+    localStorage.removeItem('editEmp');
 })
 
-//uc5
+const getEmployeePayrollDataFromStorage = () => {
+    return localStorage.getItem('EmployeePayrollList')?
+                        JSON.parse(localStorage.getItem('EmployeePayrollList')) : [];
+}
+
+
 const createInnerHtml = () => {
     const headerHtml = "<th></th><th>Name</th><th>Gender</th><th>Department</th>"+
                         "<th>Salary</th><th>Start Date</th><th>Actions</th>";
 
-    let empPayrollData = createEmployeePayrollJSON()[0];
+    if(empPayrollList.length == 0) return;
     
     let innerHtml = `${headerHtml}`;
     let empPayrollList = createEmployeePayrollJSON();
@@ -38,3 +49,5 @@ for(const dept of deptList){
 }
 return deptHtml;
 }
+
+
